@@ -1,0 +1,6 @@
+<div>
+    <button type="button" [disabled]="timerIsRunning" (click)="onClickStartButton()" class="btn btn-primary btn-lg me-3 btn-fixed-width">Start</button>
+    <button type="button" [disabled]="!timerIsRunning" (click)="onClickStopButton()" class="btn btn-danger btn-lg btn-fixed-width">Stop</button>
+    <p class="mt-3">{{timerIsRunning? "Gaming is running! ": "Game is over!"}}</p>   
+</div>
+

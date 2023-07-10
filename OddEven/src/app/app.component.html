@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Game of Odd and Even!</h1>
+  <app-game-control (timerIncreased)="onTimerIncreased($event)" (resetData)="onReset()"></app-game-control>
+  <hr>
+
+  <div class="row">
+      <div class="col-2">
+          <p style="font-weight: bold;">Even Numbers:</p>
+      </div>
+      <div class="col-10">
+          <app-even *ngFor="let even of evenNumbers" [evenNumber]="even"></app-even>
+      </div>
+  </div>
+
+  <div class="row">
+      <div class="col-2">
+          <p style="font-weight: bold;">Odd Numbers:</p>
+      </div>
+      <div class="col-10">
+          <app-odd *ngFor="let odd of oddNumbers" [oddNumber]="odd"></app-odd>
+      </div>       
+  </div>  
+  
+</div>
