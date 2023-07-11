@@ -1,23 +1,17 @@
-<div class="row mt-2">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary" type="button">New Recipe</button>
-    </div>
-</div>
-
-<div class="card-group mt-2">
-    <div class="col-lg-3 col-md-4 col-sm-12" *ngFor="let recipe of recipes">
-        <div class="card" style="margin-right: 1px; margin-bottom: 5px;">
-            <img src="{{recipe.imagePath}}" alt="{{recipe.name}}" class="card-img-top img-fluid" style="object-fit: cover; height: 300px;">
-            <div class="card-body">
-                <h4 class="card-title">{{recipe.name}}</h4>
-                <p class="card-text">{{recipe.description}}</p>
+<div *ngFor="let recipe of recipes">
+    <div (click)="onClick(recipe)"  class="card clickable-card" style="margin-bottom: 5px;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{recipe.name}}</h5>
+                    <p class="card-text">{{recipe.description}}</p>
+                </div>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Details...</small>
+            <div class="col-md-4 d-flex justify-content-end">
+                <img src="{{recipe.imagePath}}" alt="{{recipe.name}}" class="img-fluid p-1 fixed-image">
             </div>
-        </div>  
+        </div>
     </div> 
 </div>
-
 
 

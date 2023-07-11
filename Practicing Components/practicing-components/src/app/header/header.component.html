@@ -19,8 +19,8 @@
         <!--NavigationMenu-->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item active"><a class="nav-link" href="#">Recipes</a></li>    
-                <li class="nav-item"><a class="nav-link" href="#">Shopping List</a></li>
+                <li class="nav-item" [class.active]="tabSelected === 'recipes'"><a class="nav-link" (click)="onClick('recipes')" style="cursor: pointer;">Recipes</a></li>    
+                <li class="nav-item" [class.active]="tabSelected === 'shopping-list'"><a class="nav-link" (click)="onClick('shopping-list')" style="cursor: pointer;">Shopping List</a></li>
                 <li class="nav-item dropdown">
                     <a  class="nav-link dropdown-toggle" 
                         href="#" 
@@ -42,5 +42,11 @@
         </div> 
     </div>
 </nav>
+
+<div class="row mt-2">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-primary" type="button">New Recipe</button>
+    </div>
+</div>
 
 

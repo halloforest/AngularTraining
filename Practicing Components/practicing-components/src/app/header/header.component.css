@@ -1,0 +1,4 @@
+.nav-item.active a.nav-link {
+    text-decoration: underline;
+    font-weight: bold;
+  }

@@ -9,3 +9,13 @@ export class Recipe {
         this.imagePath = imagePath;
     }
 }
+
+export class ShoppingItem {
+    public item: string;
+    public amount: number;
+
+    constructor(item: string, amount: number) {
+        this.item = item;
+        this.amount = amount;
+    }
+}

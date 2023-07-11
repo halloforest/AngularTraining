@@ -1,9 +1,9 @@
 <div class="container" >
-  <app-header></app-header>
-  <app-recipes></app-recipes>
-  <app-shopping-list></app-shopping-list>
+  <app-header (navigationSelected)="onNavigationSelected($event)"></app-header>
 
-  <app-recipe-detail></app-recipe-detail>
+  <app-recipes *ngIf="navigationSelected === 'recipes'"></app-recipes> 
+
+  <app-shopping-list *ngIf="navigationSelected === 'shopping-list'"></app-shopping-list>
 </div>
 
 
