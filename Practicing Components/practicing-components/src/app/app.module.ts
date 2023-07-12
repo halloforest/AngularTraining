@@ -11,7 +11,6 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { MouseoverDirective } from './share/mouseover.directive';
 
 @NgModule({
   declarations: [
@@ -22,8 +21,7 @@ import { MouseoverDirective } from './share/mouseover.directive';
     RecipesComponent,
     RecipeDetailComponent,
     RecipeItemComponent,
-    ShoppingEditComponent,
-    MouseoverDirective
+    ShoppingEditComponent
   ],
   imports: [
     BrowserModule,

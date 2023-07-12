@@ -1,16 +1,38 @@
 <div class="card">
-  <img src="{{recipe.imagePath}}" class="card-img-top" alt="{{recipe.name}}" style="max-height: 500px; object-fit: cover;">
+  <img src="{{getSelectedRecipe().imagePath}}" class="card-img-top" alt="{{getSelectedRecipe().name}}" style="max-height: 500px; object-fit: cover;">
+
   <div class="card-body">
-    <h5 class="card-title">{{recipe.name}}</h5>
-    <p class="card-text">{{recipe.description}}</p>
+    <h2 class="card-title">{{getSelectedRecipe().name}}</h2>
+    <p class="card-text">{{getSelectedRecipe().description}}</p>
   </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">An item</li>
-    <li class="list-group-item">A second item</li>
-    <li class="list-group-item">A third item</li>
-  </ul>
   <div class="card-body">
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <h5 class="card-title">Ingredient:</h5>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button class="btn btn-primary" (click)="onClickAddButton()"  type="button">Add to Shopping List</button>
+    </div>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th scope="col" class="col-md-3">Material</th>
+          <th scope="col" class="col-md-3">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+          <ng-container *ngFor="let material of getSelectedRecipe().ingredient.materials">
+              <tr>
+                  <td>{{material.item}}</td>
+                  <td>{{material.amount}}</td>
+              </tr>
+          </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-body">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button class="btn btn-primary" type="button">Edit Recipe</button>
+      <button class="btn btn-danger" type="button">Delete Recipe</button>
+    </div>
   </div>
 </div>
+

@@ -1,11 +1,11 @@
 <form class="row g-3">
     <div class="col-md-3">
-      <label class="form-label">Item</label>
+      <label class="form-label">Material</label>
       <input type="text" class="form-control" #item>
     </div>
     <div class="col-md-3">
       <label class="form-label">Amount</label>
-      <input type="number" class="form-control" #amount>
+      <input type="text" class="form-control" #amount>
     </div>
     
     <div class="col-12">
@@ -16,18 +16,18 @@
 <table class="table mt-3">
     <thead>
       <tr>
-        <th scope="col" class="col-md-3">Item</th>
+        <th scope="col" class="col-md-3">Material</th>
         <th scope="col" class="col-md-3">Amount</th>
         <th scope="col" class="col-md-6">Delete</th>
       </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let item of shoppingItems; let i = index">
+        <ng-container *ngFor="let material of shoppingList.materials; let i = index">
             <tr>
-                <td>{{item.item}}</td>
-                <td>{{item.amount}}</td>
+                <td>{{material.item}}</td>
+                <td>{{material.amount}}</td>
                 <td><button type="button" (click)="onClickDeleteButton(i)" class="btn-close" aria-label="Delete" title="Delete"></button></td>
             </tr>
         </ng-container>
     </tbody>
-  </table>
+</table>

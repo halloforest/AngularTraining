@@ -1,5 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Component } from '@angular/core';
+import { Recipe, RecipeService } from '../recipe.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -7,24 +7,14 @@ import { Recipe } from '../recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent {
-@Output() recipeSelected = new EventEmitter<Recipe>();
-  
-  recipes : Recipe[] = [
-    new Recipe("Pizza", "Recipe for your toscana pizza.", "https://thestayathomechef.com/wp-content/uploads/2020/02/Italian-Style-Pizza-Dough-9.jpg"),
-    new Recipe("Pasta", "Yammy Pasta", "https://img.bildderfrau.de/img/rezepte/origs237822725/1977338851-w1200-h960-q85-dc1/pasta-creme-fraiche-sosse.jpg"),
-    new Recipe("Pasta", "Yammy Pasta", "https://img.bildderfrau.de/img/rezepte/origs237822725/1977338851-w1200-h960-q85-dc1/pasta-creme-fraiche-sosse.jpg"),
-    new Recipe("Pasta", "Yammy Pasta", "https://img.bildderfrau.de/img/rezepte/origs237822725/1977338851-w1200-h960-q85-dc1/pasta-creme-fraiche-sosse.jpg"),
-    new Recipe("Pasta", "Yammy Pasta", "https://img.bildderfrau.de/img/rezepte/origs237822725/1977338851-w1200-h960-q85-dc1/pasta-creme-fraiche-sosse.jpg"),
-    new Recipe("Pasta", "Yammy Pasta", "https://img.bildderfrau.de/img/rezepte/origs237822725/1977338851-w1200-h960-q85-dc1/pasta-creme-fraiche-sosse.jpg"),
-  ];
+  recipes: Recipe[] = [];
+  constructor(private recipeService: RecipeService) {}
 
-  onClick(recipe : Recipe) {
-    this.recipeSelected.emit(recipe);     
+  onClick(index: number) {
+    this.recipeService.updateSelectedRecipeIndex(index);
   }
 
   ngOnInit() {
-    this.recipeSelected.emit(this.recipes[0]);     
+    this.recipes = this.recipeService.recipes;
   }
-
-  
 }

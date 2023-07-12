@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { Recipe } from '../recipe.model';
+import { Component } from '@angular/core';
+import { Recipe, RecipeService } from '../recipe.service';
+import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -8,5 +9,13 @@ import { Recipe } from '../recipe.model';
 })
 
 export class RecipeDetailComponent {
-  @Input() recipe: Recipe = new Recipe("Hotdog", "Recipe for Hotdog", "https://www.gusto.at/_storage/asset/5720541/storage/womanat:slideshow-large/file/81812868/r_5391.jpg");
+  constructor(private recipeService: RecipeService, private shoppingListService: ShoppingListService) {}
+
+  getSelectedRecipe(): Recipe {
+    return this.recipeService.getSelectedRecipe();
+  }
+
+  onClickAddButton() {
+    this.shoppingListService.addShoppingList(this.recipeService.getSelectedMaterials());
+  }
 }

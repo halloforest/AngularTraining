@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ShoppingItem } from 'src/app/recipes/recipe.model';
+import { ShoppingList, ShoppingListService } from '../shopping-list.service';
+import { Material } from 'src/app/recipes/recipe.service';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -8,15 +9,19 @@ import { ShoppingItem } from 'src/app/recipes/recipe.model';
 })
 
 export class ShoppingEditComponent {
-  shoppingItem: ShoppingItem = new ShoppingItem("", 0);
-  shoppingItems: ShoppingItem[] = [];
+  shoppingList!: ShoppingList;
+  constructor(private shoppingListService: ShoppingListService) {}
 
-  onClickAddButton(item: string, amount: string) {
-    this.shoppingItem = new ShoppingItem(item, parseInt(amount));
-    this.shoppingItems.push(this.shoppingItem);
+  ngOnInit() {
+    this.shoppingList = this.shoppingListService.getShoppingList();
   }
 
-  onClickDeleteButton(i: number) {
-    this.shoppingItems.splice(i, 1);
+  onClickAddButton(item: string, amount: string): void {
+    var materials : Material[] = [{ item: item, amount: amount}];  
+    this.shoppingListService.addShoppingList(materials);
+  }
+
+  onClickDeleteButton(index: number): void {
+    this.shoppingListService.deleteMaterialFromShoppingList(index);
   }
 }

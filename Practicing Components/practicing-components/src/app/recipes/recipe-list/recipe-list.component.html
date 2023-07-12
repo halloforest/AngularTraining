@@ -1,10 +1,9 @@
-<div *ngFor="let recipe of recipes">
-    <div (click)="onClick(recipe)"  class="card" style="margin-bottom: 5px;">
+<div *ngFor="let recipe of recipes, let i = index">
+    <div (click)="onClick(i)"  class="card" style="margin-bottom: 5px;">
         <div class="row">
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{recipe.name}}</h5>
-                    <p class="card-text">{{recipe.description}}</p>
+                    <p class="card-title">{{recipe.name}}</p>
                 </div>
             </div>
             <div class="col-md-4 d-flex justify-content-end">
