@@ -1,0 +1,19 @@
+<div *ngIf="!allowEdit" class="alert alert-warning" role="alert">
+  <h5>Edit not possible!</h5>
+  You are not allowed to edit the server!
+</div>
+<div *ngIf="allowEdit">
+  <div class="form-group">
+    <label class="fw-bold" for="name">Server Name</label>
+    <input type="text" id="name" class="form-control" [(ngModel)]="serverName">
+  </div>
+  <div class="form-group mt-3">
+    <label class="fw-bold" for="status">Server Status</label>
+    <select id="status" class="form-control" [(ngModel)]="serverStatus">
+      <option value="online">Online</option>
+      <option value="offline">Offline</option>
+    </select>
+  </div>
+  <button class="btn btn-primary mt-3" (click)="onUpdateServer()">Update Server</button>
+</div>
+

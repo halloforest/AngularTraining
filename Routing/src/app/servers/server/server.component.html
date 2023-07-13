@@ -1,0 +1,8 @@
+<h5>{{ server.name }}</h5>
+<div>
+    <span class="badge" [ngClass]="{'text-bg-success': server.status === 'online', 'text-bg-danger': server.status === 'offline'}"> This server is {{ server.status }}.</span>    
+</div>
+
+<button class="btn btn-primary mt-3" (click)="onClickEditButton()" >
+    Edit Server
+</button>
