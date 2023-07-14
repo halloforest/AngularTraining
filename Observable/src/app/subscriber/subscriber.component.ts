@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, filter, map } from 'rxjs';
 import { PublisherService } from '../publisher.service';
 
 @Component({
@@ -33,7 +33,10 @@ export class SubscriberComponent {
     // Prevent from subscription for multiple times
     if(this.subscriber1 != null) return;
     
-    this.subscriber1 = this.publisherService.publisher.subscribe({
+    this.subscriber1 = this.publisherService.publisher.pipe(
+      map((value: number) => value *2), 
+      filter((value: number) => value % 3 === 0)).
+    subscribe({
       next: (value: number) => {this.value1 = value; console.log("Subscriber1 value received:", value);},
       error: (error: any) => {console.log("Error 1:", error);},
       complete: () => {console.log("Subscription 1 completed");}});   
@@ -63,5 +66,5 @@ export class SubscriberComponent {
     if(this.subscriber2 != null) this.subscriber2.unsubscribe(); 
     this.subscriber2 = null;
   }
-
 }
+

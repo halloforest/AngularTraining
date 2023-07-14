@@ -23,8 +23,8 @@ export class PublisherService implements OnInit{
                 message.next(this.count);
             this.startCounting = true;
             
-            if(this.count == 5) message.error("Oh no, count is 5!");
-            if(this.count >= 10) message.complete();
+            // if(this.count == 5) message.error("Oh no, count is 5!");
+            // if(this.count >= 10) message.complete();
 
             console.log('Subscribed!', this.count);}, 1000);
 
