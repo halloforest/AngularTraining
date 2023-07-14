@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { RecipeService } from './recipe.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recipes',
   templateUrl: './recipes.component.html',
-  styleUrls: ['./recipes.component.css'],
-  providers: []
+  styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent {
-  constructor(private recipeService: RecipeService) {}
+  constructor(private router: Router) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+  }
+  
+  onClickAddButton() {
+    this.router.navigate(['/recipes','new']);
   }
 }

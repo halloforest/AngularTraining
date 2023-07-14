@@ -10,10 +10,6 @@ export class RecipeListComponent {
   recipes: Recipe[] = [];
   constructor(private recipeService: RecipeService) {}
 
-  onClick(index: number) {
-    this.recipeService.updateSelectedRecipeIndex(index);
-  }
-
   ngOnInit() {
     this.recipes = this.recipeService.recipes;
   }

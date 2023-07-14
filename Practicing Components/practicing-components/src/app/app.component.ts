@@ -10,9 +10,4 @@ import { RecipeService } from './recipes/recipe.service';
 })
 export class AppComponent {
   title = 'practicing-components';
-
-  navigationSelected : string = "recipe";
-  onNavigationSelected(navigationSelected : string) {
-    this.navigationSelected = navigationSelected;
-  }
 }

@@ -1,9 +1,7 @@
 <div class="container" >
-  <app-header (navigationSelected)="onNavigationSelected($event)"></app-header>
-
-  <app-recipes *ngIf="navigationSelected === 'recipes'"></app-recipes> 
-
-  <app-shopping-list *ngIf="navigationSelected === 'shopping-list'"></app-shopping-list>
+  <app-header></app-header>
+  <div class="row mt-3">
+      <router-outlet></router-outlet>
+  </div>
 </div>
-
 

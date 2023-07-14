@@ -46,19 +46,13 @@ export class RecipeService {
         imagePath: "https://thestayathomechef.com/wp-content/uploads/2020/02/Italian-Style-Pizza-Dough-9.jpg",
         ingredient: { materials: [{ item: "Apple", amount: "2 Stück" }, { item: "Orange", amount: "330 g" }] }
     }];
-            
-    selectedRecipeIndex: number = 0;
 
-    updateSelectedRecipeIndex(index: number) {
-        this.selectedRecipeIndex = index;
+    getRecipe(index: number): Recipe {
+        return this.recipes[index];
     }
 
-    getSelectedRecipe(): Recipe {
-        return this.recipes[this.selectedRecipeIndex];
-    }
-
-    getSelectedMaterials(): Material[] {
-        return this.recipes[this.selectedRecipeIndex].ingredient.materials;
+    getMaterials(index: number): Material[] {
+        return this.recipes[index].ingredient.materials;
     }
 }
 

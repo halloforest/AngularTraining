@@ -1,52 +1,27 @@
-<nav class="navbar sticky-top navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <!--Brand-->
-        <div class="navbar-header">
-            <a href="#" class="navbar-brand">Recipe Book</a>
-        </div>
-
-        <!--Hamburg button-->
-        <button class="navbar-toggler" 
-                type="button" 
-                data-toggle="collapse" 
-                data-target="#navbarSupportedContent" 
-                aria-controls="navbarSupportedContent" 
-                aria-expanded="false" 
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+      <a class="navbar-brand" routerLink="/">Recipe Book</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/recipes">Recipes</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
+          </li>
+        </ul>
+      </div>
+      <div class="dropdown" (click)="toggleDropdown()">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Manage
         </button>
-
-        <!--NavigationMenu-->
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item" [class.active]="tabSelected === 'recipes'"><a class="nav-link" (click)="onClick('recipes')" style="cursor: pointer;">Recipes</a></li>    
-                <li class="nav-item" [class.active]="tabSelected === 'shopping-list'"><a class="nav-link" (click)="onClick('shopping-list')" style="cursor: pointer;">Shopping List</a></li>
-                <li class="nav-item dropdown">
-                    <a  class="nav-link dropdown-toggle" 
-                        href="#" 
-                        id="navbarDropdown" 
-                        role="button" 
-                        data-toggle="dropdown" 
-                        aria-haspopup="true" 
-                        aria-expanded="false">
-                      Action
-                    </a>                    
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="#">Save Data</a>
-                      <a class="dropdown-item" href="#">Fetch Data</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Others</a>
-                    </div>
-                </li>
-            </ul>
-        </div> 
+        <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+          <li><a class="dropdown-item">Save Data</a></li>
+          <li><a class="dropdown-item">Fetch Data</a></li>
+        </ul>
+      </div>
     </div>
 </nav>
-
-<div class="row mt-2">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button class="btn btn-primary" type="button">New Recipe</button>
-    </div>
-</div>
-
-

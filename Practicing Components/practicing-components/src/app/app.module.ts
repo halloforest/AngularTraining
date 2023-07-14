@@ -11,6 +11,8 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
     RecipesComponent,
     RecipeDetailComponent,
     RecipeItemComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    PageNotFoundComponent,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

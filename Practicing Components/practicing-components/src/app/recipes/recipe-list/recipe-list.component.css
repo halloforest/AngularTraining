@@ -13,3 +13,8 @@
     /* Styles on hover */
     transform: scale(1.05);
   }
+
+  .card.active {
+    /* Styles on active */
+    background-color: #eee;
+  }
