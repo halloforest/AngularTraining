@@ -1,5 +1,5 @@
 <div>
-    <h2>Progress 1:</h2>
+    <h2>Subscriber 1:</h2>
     <div class="progress" role="progressbar">
         <div class="progress-bar" [ngStyle]="{'width': value1+'%'}"> {{value1}}</div>
     </div>
@@ -9,11 +9,10 @@
         <button type="button" class="btn btn-primary me-3" (click)="onStart1()">Start</button>
         <button type="button" class="btn btn-primary" (click)="onStop1()">Stop</button>
     </div>
-    <p>{{infoText1}}</p>
 </div>
 <hr>
 <div>
-    <h2>Progress 2:</h2>
+    <h2>Subscriber 2:</h2>
     <div class="progress" role="progressbar">
         <div class="progress-bar" [ngStyle]="{'width': value2+'%'}"> {{value2}}</div>
     </div>
@@ -24,3 +23,18 @@
         <button type="button" class="btn btn-primary" (click)="onStop2()">Stop</button>
     </div>
 </div>
+<hr>
+<div>
+    <h2>Subscriber 3:</h2>
+    <p>Subscriber 1 and Subscriber 2 share the same observable. Subscriber 3 get the value from a Subject.</p>
+    <div class="progress" role="progressbar">
+        <div class="progress-bar" [ngStyle]="{'width': value3+'%'}"> {{value3}}</div>
+    </div>
+
+    <div class="mt-3">
+        <button type="button" class="btn btn-primary me-3" (click)="onReset3()">Reset</button>
+        <button type="button" class="btn btn-primary me-3" (click)="onStart3()">Start</button>
+        <button type="button" class="btn btn-primary" (click)="onStop3()">Stop</button>
+    </div>
+</div>
+

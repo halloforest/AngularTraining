@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from "@angular/core";
-import { Observable, interval, takeUntil } from "rxjs";
+import { Observable, Subject } from "rxjs";
 
 @Injectable({providedIn: 'root'})
 
@@ -8,9 +8,9 @@ export class PublisherService implements OnInit{
     publisher: any;
     countIntervalId: any;
     startCounting: boolean = false;
+    subject!: Subject<number>;
 
-    ngOnInit() {
-        // it will NOT be invoked
+    ngOnInit(): void {        
     }
   
     constructor() {
@@ -33,6 +33,18 @@ export class PublisherService implements OnInit{
             clearInterval(eventIntervalId);
             console.log('Unsubscribed?', this.count);};
         });
+
+        // Initialize the subject
+        this.subject = new Subject<number>();
+        setInterval(() => {
+            this.subject.next(this.count);
+            this.startCounting = true;
+      
+            // if (this.count === 5) { this.subject.error("Oh no, count is 5!"); }
+            // if (this.count >= 10) { this.subject.complete(); }
+      
+            console.log('Subscribed to subject!', this.count);
+          }, 1000);
     }
 
     resetCount() {

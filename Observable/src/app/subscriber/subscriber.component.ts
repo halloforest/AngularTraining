@@ -10,10 +10,10 @@ import { PublisherService } from '../publisher.service';
 export class SubscriberComponent {
   value1: number = 0;
   value2: number = 0;
-  infoText1: string = "";
-  infoText2: string = "";
+  value3: number = 0;
   subscriber1: Subscription | null = null;
   subscriber2: Subscription | null = null;
+  subscriber3: Subscription | null = null;
 
   constructor(private publisherService: PublisherService) {}
 
@@ -65,6 +65,25 @@ export class SubscriberComponent {
   onStop2() {
     if(this.subscriber2 != null) this.subscriber2.unsubscribe(); 
     this.subscriber2 = null;
+  }
+
+  onReset3() {
+    this.publisherService.resetCount();
+  }
+
+  onStart3() {
+    // Prevent from subscription for multiple times
+    if(this.subscriber3 != null) return;
+
+    this.subscriber3 = this.publisherService.subject.subscribe({
+      next: (value: number) => {this.value3 = value; console.log("Subscriber 3 value received:", value);},
+      error: (error: string) => {console.log("Error 3:", error);},
+      complete: () => {console.log("Subscription3 completed");}});
+  }
+
+  onStop3() {
+    if(this.subscriber3 != null) this.subscriber3.unsubscribe(); 
+    this.subscriber3 = null;
   }
 }
 
