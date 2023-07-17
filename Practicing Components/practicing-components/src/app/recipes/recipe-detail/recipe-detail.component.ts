@@ -21,13 +21,12 @@ export class RecipeDetailComponent {
   ngOnInit() { 
     // Subscripe to the changes
     this.activatedRoute.params.subscribe(
-      (params: Params) => {this.recipeId = +params['id']; this.recipe = this.recipeService.getRecipe(this.recipeId);}
+      (params: Params) => {
+        if(params['id'] == null) this.recipeId = 0;
+        else if (+params['id'] >= this.recipeService.recipes.length) this.recipeId = -1;
+        else this.recipeId = +params['id'];
+        if(this.recipeId != -1) this.recipe = this.recipeService.getRecipe(this.recipeId);}
     );
-
-    if(this.activatedRoute.snapshot.params['id'] == null) {
-      this.recipeId = 0;
-      this.recipe = this.recipeService.getRecipe(this.recipeId);
-    }
   }
 
   onClickAddButton() {

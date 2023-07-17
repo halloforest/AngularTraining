@@ -1,6 +1,5 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ShoppingList, ShoppingListService } from './shopping-list.service';
-import { NgForm } from '@angular/forms';
 import { Material } from '../recipes/recipe.service';
 
 enum EditStatus {

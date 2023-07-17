@@ -1,4 +1,8 @@
-<div class="card">
+<div *ngIf="recipeId == -1">
+  <h2>Recipe doesn't exist!</h2>
+</div>
+
+<div class="card" *ngIf="recipeId >= 0">
   <img src="{{recipe.imagePath}}" class="card-img-top" alt="{{recipe.name}}" style="max-height: 500px; object-fit: cover;">
 
   <div class="card-body">
@@ -8,7 +12,7 @@
   <div class="card-body">
     <h5 class="card-title">Ingredient:</h5>
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-      <button class="btn btn-primary" (click)="onClickAddButton()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Add to Shopping List</button>
+      <button class="btn btn-primary" (click)="onClickAddButton()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" [disabled]="recipe.ingredient.materials.length == 0" >Add to Shopping List</button>
     </div>
     <table class="table mt-3">
       <thead>
@@ -34,30 +38,30 @@
       <button class="btn btn-danger" type="button" (click)="onDeleteButton()">Delete Recipe</button>
     </div>
   </div>
-</div>
-<br>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Added to your Shopping List:</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <table class="table">
-          <tbody>
-              <ng-container *ngFor="let material of recipe.ingredient.materials">
-                  <tr>
-                      <td>{{material.item}}</td>
-                      <td>{{material.amount}}</td>
-                  </tr>
-              </ng-container>
-          </tbody>
-        </table>
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Added to your Shopping List:</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+            <tbody>
+                <ng-container *ngFor="let material of recipe.ingredient.materials">
+                    <tr>
+                        <td>{{material.item}}</td>
+                        <td>{{material.amount}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<br>
 

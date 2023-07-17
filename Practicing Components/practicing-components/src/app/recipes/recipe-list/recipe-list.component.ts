@@ -11,6 +11,10 @@ export class RecipeListComponent {
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit() {
-    this.recipes = this.recipeService.recipes;
+    this.getRecipes()
   }
+
+  getRecipes(): Recipe[] {
+    return this.recipeService.recipes;  
+  } 
 }

@@ -43,6 +43,8 @@ export class RecipeEditComponent {
         this.loadExistingRecipeToForm();               
       }
     );
+
+    this.recipeService.setEditMode();
   }
 
   ngOnDestroy() {

@@ -1,7 +1,6 @@
 <h2 *ngIf="isNewRecipe">New Recipe</h2>
 <h2 *ngIf="!isNewRecipe">Edit Recipe: {{recipe.name}}</h2>
 <br>
-
 <form [formGroup]="recipeEditForm" (ngSubmit)="onFormSubmit()">
     <!-- Name -->
     <div class="form-group">
@@ -12,15 +11,16 @@
     <!-- Description --> 
     <div class="form-group mt-3">
         <label>Description*</label>
-        <input class="form-control" type="text" formControlName="description">
+        <textarea class="form-control" type="text" formControlName="description" rows="5"></textarea>
     </div>
 
     <!-- Image Path --> 
     <div class="form-group mt-3">
         <label>Image</label>
-        <input class="form-control" type="text" formControlName="imagePath">
+        <input class="form-control" type="text" formControlName="imagePath" #imagePath>
     </div>
-
+    
+    <!-- Ingredient--> 
     <div class="form-group mt-3" formArrayName="ingredient">
         <label>Ingredient</label>
         <div class="row mt-1">

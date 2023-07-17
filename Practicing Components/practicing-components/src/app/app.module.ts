@@ -13,7 +13,6 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { ShoppingListAddInlineComponent } from './shopping-list/shopping-list-add-inline/shopping-list-add-inline.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +25,7 @@ import { ShoppingListAddInlineComponent } from './shopping-list/shopping-list-ad
     RecipeItemComponent,
     ShoppingEditComponent,
     PageNotFoundComponent,
-    RecipeEditComponent,
-    ShoppingListAddInlineComponent
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

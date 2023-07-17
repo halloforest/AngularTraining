@@ -1,3 +1,5 @@
+import { Injectable } from "@angular/core";
+
 export interface Material {
     item: string;
     amount: string;    
@@ -14,6 +16,9 @@ export interface Recipe {
     ingredient: Ingredient;
 }
 
+@Injectable({
+    providedIn: 'root' // Indicates that this service should be provided at the root level
+  })
 export class RecipeService {
     recipes : Recipe[] =  [
     {   

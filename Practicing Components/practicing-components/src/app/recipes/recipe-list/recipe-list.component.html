@@ -1,4 +1,4 @@
-<div *ngFor="let recipe of recipes, let i = index">
+<div *ngFor="let recipe of getRecipes(), let i = index">
     <div routerLinkActive="active" [routerLink]="['/recipes', i, recipe.name]" class="card" style="margin-bottom: 5px;">
         <div class="row">
             <div class="col-md-8">
@@ -12,5 +12,3 @@
         </div>
     </div> 
 </div>
-
-
