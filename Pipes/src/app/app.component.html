@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between align-items-end" *ngFor="let server of servers" [ngClass]="getStatusClasses(server)">
+          <span><strong>{{ server.name | textHandling: 10}}</strong> | {{ server.instanceType | uppercase}} | {{ server.started | date: 'fullDate' }}</span>
+          <span class="badge" [ngClass]="getBadgeStatusClasses(server)"> {{ server.status }}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
