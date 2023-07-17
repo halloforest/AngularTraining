@@ -21,7 +21,5 @@ export class ShoppingEditComponent {
     this.shoppingListService.addShoppingList(materials);
   }
 
-  onClickDeleteButton(index: number): void {
-    this.shoppingListService.deleteMaterialFromShoppingList(index);
-  }
+
 }

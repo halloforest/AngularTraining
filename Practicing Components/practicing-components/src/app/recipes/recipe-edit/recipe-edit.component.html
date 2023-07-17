@@ -1,2 +1,51 @@
-<h5>Recipe Edit</h5>
-<p>Recipe ID:{{recipeId}}<br>Recipe Name: {{recipe.name}}<br>Edit Mode: {{editMode}}</p>
+<h2 *ngIf="isNewRecipe">New Recipe</h2>
+<h2 *ngIf="!isNewRecipe">Edit Recipe: {{recipe.name}}</h2>
+<br>
+
+<form [formGroup]="recipeEditForm" (ngSubmit)="onFormSubmit()">
+    <!-- Name -->
+    <div class="form-group">
+        <label>Recipe Name*</label>
+        <input class="form-control" type="text" formControlName="name">
+    </div>
+
+    <!-- Description --> 
+    <div class="form-group mt-3">
+        <label>Description*</label>
+        <input class="form-control" type="text" formControlName="description">
+    </div>
+
+    <!-- Image Path --> 
+    <div class="form-group mt-3">
+        <label>Image</label>
+        <input class="form-control" type="text" formControlName="imagePath">
+    </div>
+
+    <div class="form-group mt-3" formArrayName="ingredient">
+        <label>Ingredient</label>
+        <div class="row mt-1">
+            <div class="col-md-7"><small>Item</small></div>
+            <div class="col-md-4"><small>Amount</small></div>
+        </div>
+        <div class="mt-1" *ngFor="let material of getControls(); let i = index">
+            <div class="row" [formGroupName]="i">
+                <div class="col-md-7">               
+                    <input class="form-control" type="text" formControlName="item">
+                </div>
+                <div class="col-md-4">
+                    <input class="form-control" type="text" formControlName="amount">
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-close" type="button" (click)="onClickDeleteMaterialButton(i)" *ngIf="i > 0" title="Delete"></button>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm mt-3" type="button" (click)="onAddAnotherMaterial()">Add Another Material</button>
+    </div> 
+
+    <!-- Submit button --> 
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary mt-3" type="submit" [disabled]="!recipeEditForm.valid">{{isNewRecipe? "Add New Recipe": "Update Recipe"}}</button>        
+    </div>
+
+</form>

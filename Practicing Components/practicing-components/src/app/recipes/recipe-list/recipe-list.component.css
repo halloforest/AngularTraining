@@ -3,15 +3,10 @@
     height: 100px;
     object-fit: cover;
   }
-
-  .card {
-    /* Initial styles */
-    transition: transform 0.3s ease;  
-  }
   
   .card:hover {
     /* Styles on hover */
-    transform: scale(1.05);
+    background-color: #eee;
   }
 
   .card.active {

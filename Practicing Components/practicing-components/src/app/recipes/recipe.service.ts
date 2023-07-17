@@ -15,7 +15,7 @@ export interface Recipe {
 }
 
 export class RecipeService {
-    recipes : Recipe[] =  [       
+    recipes : Recipe[] =  [
     {   
         name: "Currywurstpfanne", 
         description: "Die Bratwürste in Scheiben schneiden und Öl in einer beschichteten Pfanne erhitzen. Die Bratwurstscheiben darin braten und anschließend herausnehmen.", 
@@ -47,12 +47,40 @@ export class RecipeService {
         ingredient: { materials: [{ item: "Apple", amount: "2 Stück" }, { item: "Orange", amount: "330 g" }] }
     }];
 
+    editMode: boolean = false;
+
+    setEditMode() {
+        this.editMode = true;
+    }
+
+    resetEditMode() {
+        this.editMode = false;
+    }
+
+    getEditMode(): boolean {
+        return this.editMode;
+    }
+
     getRecipe(index: number): Recipe {
         return this.recipes[index];
     }
 
     getMaterials(index: number): Material[] {
         return this.recipes[index].ingredient.materials;
+    }
+
+    addNewRecipe(recipe: Recipe) {
+        this.recipes.push(recipe);
+        this.editMode = false;
+    }
+
+    deleteRecipe(index: number) {
+        this.recipes.splice(index, 1);
+    }
+
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe;
+        this.editMode = false;  
     }
 }
 

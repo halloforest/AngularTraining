@@ -35,6 +35,11 @@ export class RecipeDetailComponent {
   }
   
   onClickEditButton() {
-    this.router.navigate(['/recipes', this.recipeId, this.recipeService.getRecipe(this.recipeId).name, 'edit'], {queryParams: {edit: '1'}});
+    this.router.navigate(['/recipes', this.recipeId, this.recipeService.getRecipe(this.recipeId).name, 'edit']);
+  }
+
+  onDeleteButton() {
+    this.recipeService.deleteRecipe(this.recipeId);  
+    this.router.navigate(['/recipes', 0, this.recipeService.getRecipe(0).name]);
   }
 }

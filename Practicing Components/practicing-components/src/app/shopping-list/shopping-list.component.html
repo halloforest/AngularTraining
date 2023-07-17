@@ -1,6 +1,87 @@
 <div class="row">
-    <div class="clo-xs-10">
-        <app-shopping-edit></app-shopping-edit>
+    <div class="col-md-12">
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary" type="button" [disabled]="!(editStatus == EditStatus.noEdit)"  (click)="editStatus = EditStatus.add">+ New Shopping Item</button>
+        </div>
+
+        <table class="table  table-hover mt-3">
+            <thead class="table-light">
+            <tr>
+                <th scope="col" class="col-md-6">Item</th>
+                <th scope="col" class="col-md-2">Amount</th>
+                <th scope="col" class="col-md-4" style="text-align: right">Operation</th>
+            </tr>
+            </thead>
+            <tbody>
+                <!-- Add Status -->
+                <ng-container *ngTemplateOutlet="addStatus"></ng-container>
+
+                <ng-container *ngFor="let material of shoppingList.materials; let index = index">
+                    <!-- No Edit Status -->
+                    <ng-container *ngIf="index == listToUpdate">
+                        <ng-container *ngTemplateOutlet="updateStatus; context: { index: index }"></ng-container>
+                    </ng-container>
+                    <!-- Update Status -->
+                    <ng-container *ngIf="index != listToUpdate">
+                        <ng-container *ngTemplateOutlet="noEditStatus; context: { index: index }"></ng-container>
+                    </ng-container>
+                </ng-container>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<!-- Template for Add Status -->
+<ng-template #addStatus>
+    <ng-container *ngIf="editStatus == EditStatus.add">
+        <tr>
+            <td>
+                <input class="form-control" type="text" #item>
+            </td>
+            <td>
+                <input class="form-control" type="text" #amount>
+            </td>
+            <td style="vertical-align: middle; text-align: right">
+                <button type="button" class="btn btn-primary m-1" (click)="onAddButton(item.value, amount.value)">+ Add</button>
+                <button type="button" class="btn btn-secondary m-1" (click)="item.value = ''; amount.value = ''">Clear</button>
+                <button type="button" class="btn btn-secondary" (click)="editStatus = EditStatus.noEdit">Cancel</button>
+            </td>
+        </tr>
+    </ng-container>
+</ng-template>
+
+<!-- Template for No Edit Status -->
+<ng-template #noEditStatus let-index="index">
+    <tr (click)="onClickEdit(index)">
+        <td>
+            {{ shoppingList.materials[index].item }}
+        </td>
+        <td>
+            {{ shoppingList.materials[index].amount }}
+        </td>
+        <td style="text-align: right;">
+            <button class="btn btn-sm btn-outline-secondary">Click to Edit</button>
+        </td>        
+    </tr>
+</ng-template>
+
+<!-- Template for Update Status -->
+<ng-template #updateStatus let-index="index">
+    <tr>
+        <td>
+            <input class="form-control" type="text" value={{shoppingList.materials[index].item}} #item>
+        </td>
+        <td>
+            <input class="form-control" type="text" value={{shoppingList.materials[index].amount}} #amount>
+        </td>
+        <td style="vertical-align: middle; text-align: right">
+            <button type="button" class="btn btn-primary m-1" (click)="onUpdateButton(index, item.value, amount.value)" [disabled]="item.value === '' || amount.value === ''">Update</button>
+            <button type="button" class="btn btn-danger m-1" (click)="onClickDeleteButton(index)">Delete</button>
+            <button type="button" class="btn btn-secondary m-1" (click)="item.value = ''; amount.value = ''">Clear</button>
+            <button type="button" class="btn btn-secondary" (click)="onClickCancel()">Cancel</button>
+        </td>
+    </tr>
+</ng-template>
+
   

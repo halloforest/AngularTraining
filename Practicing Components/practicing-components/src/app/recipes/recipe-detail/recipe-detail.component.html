@@ -13,7 +13,7 @@
     <table class="table mt-3">
       <thead>
         <tr>
-          <th scope="col" class="col-md-3">Material</th>
+          <th scope="col" class="col-md-3">Item</th>
           <th scope="col" class="col-md-3">Amount</th>
         </tr>
       </thead>
@@ -31,10 +31,11 @@
   <div class="card-body">
     <div class="d-grid gap-2 d-md-flex justify-content-md-start">
       <button class="btn btn-primary" type="button" (click)="onClickEditButton()">Edit Recipe</button>
-      <button class="btn btn-danger" type="button">Delete Recipe</button>
+      <button class="btn btn-danger" type="button" (click)="onDeleteButton()">Delete Recipe</button>
     </div>
   </div>
 </div>
+<br>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

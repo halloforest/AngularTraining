@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { ShoppingListAddInlineComponent } from './shopping-list/shopping-list-add-inline/shopping-list-add-inline.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +26,14 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     RecipeItemComponent,
     ShoppingEditComponent,
     PageNotFoundComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    ShoppingListAddInlineComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

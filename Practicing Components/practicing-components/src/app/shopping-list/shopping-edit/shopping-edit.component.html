@@ -1,9 +1,9 @@
-<form class="row g-3">
-    <div class="col-md-3">
+<form class="row">
+    <div class="col-md-6">
       <label class="form-label">Material</label>
       <input type="text" class="form-control" #item>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-6">
       <label class="form-label">Amount</label>
       <input type="text" class="form-control" #amount>
     </div>
@@ -12,22 +12,3 @@
       <button type="submit" (click)="onClickAddButton(item.value, amount.value)" class="btn btn-primary">Add</button>
     </div>
 </form>
-
-<table class="table mt-3">
-    <thead>
-      <tr>
-        <th scope="col" class="col-md-3">Material</th>
-        <th scope="col" class="col-md-3">Amount</th>
-        <th scope="col" class="col-md-6">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-        <ng-container *ngFor="let material of shoppingList.materials; let i = index">
-            <tr>
-                <td>{{material.item}}</td>
-                <td>{{material.amount}}</td>
-                <td><button type="button" (click)="onClickDeleteButton(i)" class="btn-close" aria-label="Delete" title="Delete"></button></td>
-            </tr>
-        </ng-container>
-    </tbody>
-</table>

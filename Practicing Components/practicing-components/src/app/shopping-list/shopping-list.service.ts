@@ -19,6 +19,11 @@ export class ShoppingListService {
         }
     }
 
+    updateShoppingList(index: number, item: string, amount: string): void {
+        this.shoppingList.materials[index].item = item;
+        this.shoppingList.materials[index].amount = amount;      
+    }
+
     getShoppingList(): ShoppingList {
         return  this.shoppingList;
     }
