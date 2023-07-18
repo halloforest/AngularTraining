@@ -10,5 +10,4 @@ export class TextHandlingPipe implements PipeTransform {
     }
     return value;
   }
-
 }
