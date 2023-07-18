@@ -11,6 +11,7 @@ import { Post, PostService } from './post.service';
 export class AppComponent implements OnInit {
   posts: Post[] = [];
   postIdToDelete: number = -1;
+  error: string = '';
 
   constructor(
     private datePipe: DatePipe,
@@ -23,12 +24,11 @@ export class AppComponent implements OnInit {
     // Get access to html component from ts
   @ViewChild('postForm') postForm!: NgForm;
 
-  loadedPosts = [];
-
   ngOnInit() { 
   }
 
   onSendPost() {
+    this.error = '';
     this.postForm.form.setValue({
       title: 'Title: ' + this.getCurrentTimestamp(),
       content: 'Content: ' + this.getCurrentTimestamp()
@@ -37,26 +37,37 @@ export class AppComponent implements OnInit {
     const post: Post = {title: this.postForm.value.title, content: this.postForm.value.content};
 
     this.postService.postPosts(post)      
-    .subscribe(() => {this.onFetchPosts();});;
+    .subscribe(
+      () => {this.onFetchPosts();}, 
+      error => {this.error = "Send post error: " + error.message});;
   }
 
   onFetchPosts() {
+    this.error = '';
+
     // The calling function can handle the results after fetching
     this.postService.fetchPosts()
     .subscribe(
       (posts: Post[]) => { this.posts = posts; },
-      error => { console.log('An error occurred while fetching posts:', error); }
+      error => { this.error = "Fetch post error: " + error.message }
     );
   }
 
   onClearAllPosts() {
+    this.error = '';
+
     this.postService.deleteAllPosts()    
-    .subscribe(() => {this.onFetchPosts();});   // Update the lists after delete;
+    .subscribe(
+      () => {this.onFetchPosts();},
+      error => { this.error = "Clear all posts error: " + error.message });   // Update the lists after delete;
   }
 
   onDeletePost(index: number) {
+    this.error = '';
     this.postIdToDelete = index;
     this.postService.deletePost(this.posts[index].id)      
-    .subscribe(() => {this.postIdToDelete = -1; this.onFetchPosts();});   // Update the lists after delete
+    .subscribe(
+      () => {this.postIdToDelete = -1; this.onFetchPosts();},
+      error => { this.error = "Delete post error: " + error.message });   // Update the lists after delete
   }
 }
