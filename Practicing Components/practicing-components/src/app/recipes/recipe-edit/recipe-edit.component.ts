@@ -40,7 +40,7 @@ export class RecipeEditComponent {
         this.recipeId = +params['id']; 
         this.recipe = this.recipeService.getRecipe(this.recipeId);
         this.isNewRecipe = (params['id'] === undefined)? true : false;
-        this.loadExistingRecipeToForm();               
+        this.loadExistingRecipeToForm();
       }
     );
 

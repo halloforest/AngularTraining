@@ -1,8 +1,9 @@
-<div *ngIf="recipeId == -1">
-  <h2>Recipe doesn't exist!</h2>
+<div class="alert alert-warning" *ngIf="recipeId <= -1 || recipe === undefined" role="alert">
+  Recipe doesn't exist. {{recipeId}}  {{recipe}}
 </div>
 
-<div class="card" *ngIf="recipeId >= 0">
+
+<div class="card" *ngIf="recipeId >= 0 && recipe != null">
   <img src="{{recipe.imagePath}}" class="card-img-top" alt="{{recipe.name}}" style="max-height: 500px; object-fit: cover;">
 
   <div class="card-body">

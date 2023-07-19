@@ -15,13 +15,30 @@
         </ul>
       </div>
       <div class="dropdown" (click)="toggleDropdown()">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button">
           Manage
         </button>
         <ul class="dropdown-menu" [class.show]="isDropdownOpen">
-          <li><a class="dropdown-item">Save Data</a></li>
-          <li><a class="dropdown-item">Fetch Data</a></li>
+          <li><span class="dropdown-item" (click)="onClickSaveData()" style="cursor: pointer;">Save Data</span></li>
+          <li><span class="dropdown-item" (click)="onClickFetchData()" style="cursor: pointer;">Fetch Data</span></li>
         </ul>
       </div>
     </div>
 </nav>
+
+<div 
+class="alert alert-success alert-dismissible fade show" 
+role="alert" 
+*ngIf="messageFromRecipeServerService != ''"
+[ngClass]="{'alert-warning': messageFromRecipeServerService.includes('error'), 'alert-success': messageFromRecipeServerService.includes('success')}"
+>
+  {{messageFromRecipeServerService}}
+  <button type="button" class="btn-close" (click)="onClickCloseButton()" ></button>
+</div>
+
+<div class="row mt-3">
+  <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <button class="btn btn-primary" type="button" (click)="onClickAddButton()" [disabled]="editMode">+ New Recipe</button>
+  </div>
+</div>
+

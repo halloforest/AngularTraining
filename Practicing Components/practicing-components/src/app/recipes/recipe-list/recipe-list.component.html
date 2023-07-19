@@ -1,3 +1,7 @@
+<div class="alert alert-warning" *ngIf="getRecipes().length === 0" role="alert">
+    No Recipes!
+</div>
+
 <div *ngFor="let recipe of getRecipes(), let i = index">
     <div routerLinkActive="active" [routerLink]="['/recipes', i, recipe.name]" class="card" style="margin-bottom: 5px;">
         <div class="row">
