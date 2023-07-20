@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RecipeServerService } from '../recipes/recipe-server.service';
 import { Subscription } from 'rxjs';
-import { RecipeService } from '../recipes/recipe.service';
-import { Router } from '@angular/router';
+import { AuthService } from '../auth/auth.service';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-header',
@@ -11,24 +11,27 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   isDropdownOpen: boolean = false;
-  messageFromRecipeServerService: string = "";
-  messageToHeaderSubscription: Subscription = this.recipeServerService.messageToHeader.subscribe(
-    message => {this.messageFromRecipeServerService = message;}
-  );
+  recipeServerMessage: string = "";
+  recipeServerMessageSubscription!: Subscription;
 
-  editMode: boolean = false;
-  editModeSubscription : Subscription = this.recipeService.editMode.subscribe(value => {this.editMode = value}); ;
+  user: User | null = null;
+  userSubscription!: Subscription;
 
   constructor(
     private recipeServerService: RecipeServerService,
-    private recipeService: RecipeService, 
-    private router: Router) {}
+    private authService: AuthService) {}
 
   toggleDropdown(): void {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
   ngOnInit() {
+    this.recipeServerMessageSubscription = this.recipeServerService.recipeServerMessage.subscribe(
+      (message) => {this.recipeServerMessage = message;}
+    );
+    
+    this.userSubscription = this.authService.user.subscribe(
+      (user) => {this.user = user;})
   }
 
   onClickSaveData() {
@@ -40,21 +43,30 @@ export class HeaderComponent {
   }
 
   onClickCloseButton() {
-    this.recipeServerService.messageToHeader.next("");
+    this.recipeServerService.recipeServerMessage.next("");
   }
 
   ngOnDestroy() {
-    if (this.messageToHeaderSubscription) {
-      this.messageToHeaderSubscription.unsubscribe();
+    if (this.recipeServerMessageSubscription) {
+      this.recipeServerMessageSubscription.unsubscribe();
     }
-    
-    if (this.editModeSubscription) {
-      this.editModeSubscription.unsubscribe();
+
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
     }
   }
 
-  onClickAddButton() {
-    this.recipeService.setEditMode();
-    this.router.navigate(['/recipes','new']);
+  @HostListener('document:click', ['$event'])
+  onClickOutsideDropdown(event: Event) {
+    const targetElement = event.target as HTMLElement;
+    const dropdownElement = document.querySelector('.dropdown');
+
+    if (dropdownElement && !dropdownElement.contains(targetElement)) {
+      this.isDropdownOpen = false;
+    }
+  }
+
+  onClickLogout() {
+    this.authService.logout();
   }
 }

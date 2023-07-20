@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { RecipeService } from './recipe.service';
+import { User } from '../auth/user.model';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-recipes',
@@ -9,23 +11,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent {
-  editMode: boolean = false;
-  editModeSubscription!: Subscription;
+  user: User | null = null;
+  userSubscription!: Subscription;
   
-  constructor(private recipeService: RecipeService, private router: Router) { }
+  constructor(private authService: AuthService) { }
   
   ngOnInit() {
-    this.recipeService.editMode.subscribe(value => {this.editMode = value});
-  }
-  
-  onClickAddButton() {
-    this.recipeService.setEditMode();
-    this.router.navigate(['/recipes','new']);
+    this.userSubscription = this.authService.user.subscribe(
+      (user) => {this.user = user;})
   }
 
   ngOnDestroy() {
-    if (this.editModeSubscription) {
-      this.editModeSubscription.unsubscribe();
-    }
+    if (this.userSubscription) {this.userSubscription.unsubscribe();}
   }
 }

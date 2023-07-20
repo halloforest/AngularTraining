@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,10 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 })
 export class AppComponent {
   title = 'practicing-components';
+
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.autoSignIn();
+  }
 }
