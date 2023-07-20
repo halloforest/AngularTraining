@@ -1,0 +1,7 @@
+    <div class="container col-sm-6">
+      <br>
+      <button class="btn btn-primary" (click)="onClickError()">Trigger the error!</button>
+    
+      <app-popup-alert [heading]="heading" [body]="body" *ngIf="body" (close)="onCloseError()"></app-popup-alert>
+    </div>
+  
