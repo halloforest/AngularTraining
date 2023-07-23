@@ -82,9 +82,11 @@ export class RecipeService {
         return this.recipes[index].ingredient.materials;
     }
 
-    addNewRecipe(recipe: Recipe) {
+    addNewRecipe(recipe: Recipe): number {
         this.recipes.push(recipe);
         this.editMode.next(false);
+
+        return this.recipes.length - 1;
     }
 
     deleteRecipe(index: number) {

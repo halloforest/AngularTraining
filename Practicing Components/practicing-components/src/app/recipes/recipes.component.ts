@@ -18,7 +18,10 @@ export class RecipesComponent {
   
   ngOnInit() {
     this.userSubscription = this.authService.user.subscribe(
-      (user) => {this.user = user;})
+      (user) => {
+        this.user = user;
+      console.log("The user on recipes: ", this.user?.email);
+      })
   }
 
   ngOnDestroy() {

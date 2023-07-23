@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, catchError, map, tap, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from 'src/environment/environment.prod';
 
 export interface AuthRequestPayload {
   email: string,
@@ -24,10 +25,6 @@ interface AuthResponsePayload {
   providedIn: 'root'
 })
 export class AuthService {
-  signUpEndpoint: string = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=`;
-  signInEndpoint: string = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=`;
-  apiKey: string = `AIzaSyB8U4v2MbNkJNyKgc3Hucv34sUtVxZSZ10`;
-
   authMessage: Subject<string> = new Subject<string>;
   user = new BehaviorSubject<User | null>(null);
   private tokenExpirationTimer: any;
@@ -38,7 +35,7 @@ export class AuthService {
     this.authMessage.next("Loading...");
     this.http
       .post<AuthResponsePayload>(
-        this.signUpEndpoint + this.apiKey, 
+        environment.signUpEndpoint + environment.apiKey,
         authRequestPayload)
       .pipe(
         catchError(this.handleErrorCode),
@@ -57,7 +54,7 @@ export class AuthService {
     this.authMessage.next("Loading...");
     this.http
       .post<AuthResponsePayload>(
-        this.signInEndpoint + this.apiKey, 
+        environment.signInEndpoint + environment.apiKey,
         authRequestPayload)
       .pipe(
         catchError(this.handleErrorCode),
@@ -147,7 +144,7 @@ export class AuthService {
     this.user.next((user.token == null)? null : user);
 
     // Start the logout countdown
-    this.autoLogout(new Date().getTime() - new Date(loadedUser._tokenExpirationDate).getTime());
+    this.autoLogout(new Date(loadedUser._tokenExpirationDate).getTime() - new Date().getTime());
   }
 
   // Logout after timeout

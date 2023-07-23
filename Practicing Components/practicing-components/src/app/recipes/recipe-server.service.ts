@@ -4,13 +4,13 @@ import { Subject, Subscription, filter, map, tap, timer } from 'rxjs';
 import { Ingredient, Recipe, RecipeService } from './recipe.service';
 import { User } from '../auth/user.model';
 import { AuthService } from '../auth/auth.service';
+import { environment } from 'src/environment/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeServerService {
   recipeServerMessage: Subject<string> = new Subject<string>;
-  serverUrl: string = `https://angular-learning-72e80-default-rtdb.europe-west1.firebasedatabase.app`;
 
   constructor(
     private http: HttpClient,
@@ -25,7 +25,7 @@ export class RecipeServerService {
     // Difference between put and post:
     // POST is used to create new resources, while PUT is used to update or replace existing resources.    
     this.http
-      .put(this.serverUrl + `/recipes.json`, this.recipeService.getRecipes(), {params: this.getHttpParams()})    
+      .put(environment.dataBaseUrl + `/recipes.json`, this.recipeService.getRecipes(), {params: this.getHttpParams()})    
       .subscribe(
         () => {
           this.recipeServerMessage.next("Recipes were uploaded to the server successfully!");
@@ -44,7 +44,7 @@ export class RecipeServerService {
 
   fetchRecipesFromServer() {
     this.http
-      .get<Recipe[]>(this.serverUrl + '/recipes.json', {params: this.getHttpParams()})
+      .get<Recipe[]>(environment.dataBaseUrl + '/recipes.json', {params: this.getHttpParams()})
       .pipe(
         map((recipes: Recipe[]) => {
           const emptyIngredient: Ingredient = {materials: []};

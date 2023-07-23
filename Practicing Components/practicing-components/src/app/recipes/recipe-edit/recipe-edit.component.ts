@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Material, RecipeService } from '../recipe.service';
+import { Material, Recipe, RecipeService } from '../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -9,10 +9,9 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent {
-  recipeId: number = -1;
-  recipe: any;
+  recipeId: number | null = null;
+  recipe: Recipe | null = null;
   newRecipe: any;
-  isNewRecipe: boolean = false;
   editMode: boolean = false;
   recipeEditForm: any;
 
@@ -37,9 +36,8 @@ export class RecipeEditComponent {
     // Subscripe to the changes
     this.activatedRoute.params.subscribe(
       (params: Params) => {
-        this.recipeId = +params['id']; 
-        this.recipe = this.recipeService.getRecipe(this.recipeId);
-        this.isNewRecipe = (params['id'] === undefined)? true : false;
+        this.recipeId = ((params['id'] == undefined || +params['id'] >= this.recipeService.getRecipes().length)? null: +params['id']); 
+        this.recipe = (this.recipeId == null? null : this.recipeService.getRecipe(this.recipeId));
         this.loadExistingRecipeToForm();
       }
     );
@@ -71,13 +69,11 @@ export class RecipeEditComponent {
   onFormSubmit() {
     this.retrieveNewRecipeFromForm();
 
-    if(this.isNewRecipe) {
+    if(this.recipeId == null) {
       // Push the new recipe into the recipes array
-      this.recipeService.addNewRecipe(this.newRecipe);
+      this.recipeId = this.recipeService.addNewRecipe(this.newRecipe);
     } else {
-      if (this.recipeId != -1) {
-        this.recipeService.updateRecipe(this.recipeId, this.newRecipe);
-      }
+      this.recipeService.updateRecipe(this.recipeId, this.newRecipe);
     }
 
     this.router.navigate(['/recipes', this.recipeId, this.recipeService.getRecipe(this.recipeId).name]);
@@ -85,7 +81,7 @@ export class RecipeEditComponent {
 
   loadExistingRecipeToForm() {
     // Load values into the form if recipe exists
-    if (!this.isNewRecipe && this.recipe) {
+    if (this.recipe != null) {
       this.recipeEditForm.patchValue({
         'name': this.recipe.name,
         'description': this.recipe.description,

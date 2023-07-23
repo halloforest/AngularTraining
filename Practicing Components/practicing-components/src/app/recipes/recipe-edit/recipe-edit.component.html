@@ -1,5 +1,5 @@
-<h2 *ngIf="isNewRecipe">New Recipe</h2>
-<h2 *ngIf="!isNewRecipe">Edit Recipe: {{recipe.name}}</h2>
+<h2 *ngIf="recipeId == null">New Recipe</h2>
+<h2 *ngIf="recipeId != null && recipe != null">Edit Recipe: {{recipe.name}}</h2>
 <br>
 <form [formGroup]="recipeEditForm" (ngSubmit)="onFormSubmit()">
     <!-- Name -->
@@ -45,7 +45,7 @@
 
     <!-- Submit button --> 
     <div class="d-grid gap-2">
-        <button class="btn btn-primary mt-3" type="submit" [disabled]="!recipeEditForm.valid">{{isNewRecipe? "Add New Recipe": "Update Recipe"}}</button>        
+        <button class="btn btn-primary mt-3" type="submit" [disabled]="!recipeEditForm.valid">{{recipeId == null? "Add New Recipe": "Update Recipe"}}</button>        
     </div>
 
 </form>
